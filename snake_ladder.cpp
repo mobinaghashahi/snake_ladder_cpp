@@ -1,7 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-
+#include <windows.h>
+#include <unistd.h>
 using namespace std;
 
 int snakeHead[8]={14,27,35,50,70,77,86,99};
@@ -38,7 +39,7 @@ void createMap(int position1,int position2){
         else if(index==snakeTail[index])
             cout<<"T";
         else
-            cout<<"_";
+            cout<<"-";
             endS:;
     }
     cout<<"END";
@@ -52,11 +53,12 @@ int main() {
     int currentPlayer = 1; // Player 1 starts
 
     while (player1 < 100 && player2 < 100) {
+            system("cls");
              createMap(player1,player2);
         // Switch players
         if (currentPlayer == 1) {
             cout << "Player 1's turn. Press Enter to roll the dice...";
-            cin.get();
+             sleep(1);
             int dice = rollDice();
             cout << "You rolled a " << dice << endl;
             player1 += dice;
@@ -65,7 +67,7 @@ int main() {
             player1=snakeHomeCheck(player1);
         } else {
             cout << "Player 2's turn. Press Enter to roll the dice...";
-            cin.get();
+             sleep(1);
             int dice = rollDice();
             cout << "You rolled a " << dice << endl;
             player2 += dice;
@@ -78,7 +80,7 @@ int main() {
     // Determine the winner
     if (player1 >= 100) {
         cout << "Player 1 wins!" << endl;
-    } else if (player2 >= 100){
+    } else {
         cout << "Player 2 wins!" << endl;
     }
 
